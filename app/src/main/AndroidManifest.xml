@@ -10,14 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Arnedo_PerezMedrano_Practica_Android_M08UF1">
         <activity
+            android:name=".GameActivityV3"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".GameActivityV2"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".GameActivityV1"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
