@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivityV1 extends AppCompatActivity {
 
     private static String[] palabras = {"MANZANA", "PIMIENTO", "COLIFLOR", "BERENJENA", "PATATA", "CALABAZA", "ACELGAS", "TOMATE"};
     private TextView tvPalabra;
