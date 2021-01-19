@@ -21,6 +21,7 @@ public class GameActivity extends AppCompatActivity {
     private ImageView imagen;
     List<String> arrayCompletar = new ArrayList<String>();
     private String palabraSeleccionada;
+    private int intentos = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class GameActivity extends AppCompatActivity {
         tvPalabra.setText(hideWord(palabraSeleccionada));
 
         imagen = (ImageView) findViewById(R.id.imagen);
+        imagen.setImageResource(imagenes[10 - intentos]);
     }
 
     private String hideWord(String word) {
@@ -71,6 +73,9 @@ public class GameActivity extends AppCompatActivity {
                 }
                 tvPalabra.setText(textoAMostrar);
             }
+        } else {
+            intentos --;
+            imagen.setImageResource(imagenes[10 - intentos]);
         }
     }
 
