@@ -15,13 +15,14 @@ import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
 
-    private static String[] palabras = {"MANZANA","PIMIENTO", "COLIFLOR", "BERENJENA", "PATATA", "CALABAZA", "ACELGAS", "TOMATE"};
+    private static String[] palabras = {"MANZANA", "PIMIENTO", "COLIFLOR", "BERENJENA", "PATATA", "CALABAZA", "ACELGAS", "TOMATE"};
     private TextView tvPalabra;
-    private static int[] imagenes = {R.drawable.ahorcado0,R.drawable.ahorcado1,R.drawable.ahorcado2,R.drawable.ahorcado3,R.drawable.ahorcado4,R.drawable.ahorcado5,R.drawable.ahorcado6,R.drawable.ahorcado7,R.drawable.ahorcado8,R.drawable.ahorcado9,R.drawable.ahorcado10, };
+    private static int[] imagenes = {R.drawable.ahorcado0, R.drawable.ahorcado1, R.drawable.ahorcado2, R.drawable.ahorcado3, R.drawable.ahorcado4, R.drawable.ahorcado5, R.drawable.ahorcado6, R.drawable.ahorcado7, R.drawable.ahorcado8, R.drawable.ahorcado9, R.drawable.ahorcado10,};
     private ImageView imagen;
     List<String> arrayCompletar = new ArrayList<String>();
     private String palabraSeleccionada;
     private int intentos = 10;
+    private boolean ganar = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,37 +51,45 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void letraPulsada(View v) {
-        Button b = (Button) v;
-        //palabra.setText(b.getText());
-        String stLetraPulsada = String.valueOf(b.getText());
-        String p = (String) tvPalabra.getText();
-        b.setEnabled(false);
 
-        if (palabraSeleccionada.contains(stLetraPulsada)){
-            for(int i = 0; i < palabraSeleccionada.length(); i++){
-                char c = palabraSeleccionada.charAt(i);
-                if (stLetraPulsada.charAt(0) == c) {
-                    //cambiarLetra(stLetraPulsada, i);
-                    arrayCompletar.set(i, stLetraPulsada);
+        if (intentos > 0) {
+            if (!ganar) {
+                Button b = (Button) v;
+                //palabra.setText(b.getText());
+                String stLetraPulsada = String.valueOf(b.getText());
+                String p = (String) tvPalabra.getText();
+                b.setEnabled(false);
+
+                if (palabraSeleccionada.contains(stLetraPulsada)) {
+                    for (int i = 0; i < palabraSeleccionada.length(); i++) {
+                        char c = palabraSeleccionada.charAt(i);
+                        if (stLetraPulsada.charAt(0) == c) {
+                            //cambiarLetra(stLetraPulsada, i);
+                            arrayCompletar.set(i, stLetraPulsada);
+                            if (!arrayCompletar.contains("_")) {
+                                ganar = true;
+                                imagen.setImageResource(R.drawable.youwin);
+                            }
+                        }
+
+                        String textoAMostrar = "";
+                        String palabraComprobante = "";
+
+                        for (int x = 0; x < arrayCompletar.size(); x++) {
+                            textoAMostrar += " " + arrayCompletar.get(x);
+                            palabraComprobante += arrayCompletar.get(x);
+                        }
+                        tvPalabra.setText(textoAMostrar);
+                    }
+                } else {
+                    intentos--;
+                    imagen.setImageResource(imagenes[10 - intentos]);
                 }
-
-                String textoAMostrar = "";
-                String palabraComprobante = "";
-
-                for (int x = 0; x < arrayCompletar.size(); x++) {
-                    textoAMostrar += " " + arrayCompletar.get(x);
-                    palabraComprobante +=  arrayCompletar.get(x);
-                }
-                tvPalabra.setText(textoAMostrar);
             }
         } else {
-            intentos --;
-            imagen.setImageResource(imagenes[10 - intentos]);
+            imagen.setImageResource(R.drawable.gameover);
         }
+
     }
 
-    /*public void cambiarLetra(String stLetraPulsada, int posicion){
-        arrayCompletar.set(posicion, String.valueOf(stLetraPulsada));
-
-    }*/
 }
