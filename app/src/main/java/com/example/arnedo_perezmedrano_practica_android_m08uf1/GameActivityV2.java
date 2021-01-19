@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class GameActivityV2 extends AppCompatActivity {
 
-    private static String[] palabras = {"MANZANA", "PIMIENTO", "COLIFLOR", "BERENJENA", "PATATA", "CALABAZA", "ACELGAS", "TOMATE"};
+    private String[] palabras;
     private TextView tvPalabra;
     private static int[] imagenes = {R.drawable.ahorcado0, R.drawable.ahorcado1, R.drawable.ahorcado2, R.drawable.ahorcado3, R.drawable.ahorcado4, R.drawable.ahorcado5, R.drawable.ahorcado6, R.drawable.ahorcado7, R.drawable.ahorcado8, R.drawable.ahorcado9, R.drawable.ahorcado10,};
     private ImageView imagen;
@@ -29,6 +29,8 @@ public class GameActivityV2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        palabras = getResources().getStringArray(R.array.words);
 
         tvPalabra = (TextView) findViewById(R.id.palabra);
         Random rand = new Random();

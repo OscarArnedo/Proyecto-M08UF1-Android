@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="words">
+        <item>MANZANA</item>
+        <item>PIMIENTO</item>
+        <item>COLIFLOR</item>
+        <item>BERENJENA</item>
+        <item>PATATA</item>
+        <item>CALABAZA</item>
+        <item>ACELGAS</item>
+        <item>TOMATE</item>
+    </string-array>
+</resources>

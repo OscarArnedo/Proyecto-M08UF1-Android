@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
 
     private void jugar(View view) {
         Intent intent = new Intent(getApplicationContext(),
-                GameActivityV1.class);
+                GameActivityV2.class);
         startActivity(intent);
     }
 
