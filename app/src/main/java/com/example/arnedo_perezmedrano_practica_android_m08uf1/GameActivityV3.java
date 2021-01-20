@@ -12,6 +12,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -29,7 +30,6 @@ public class GameActivityV3 extends AppCompatActivity {
     private boolean ganar = false;
 
     //Base de datos
-    private ArrayList<String> resultadosBD = new ArrayList<String>();
     SQLiteDatabase bd = null;
     private final String BASE_DATOS = "ahorcado";
     private final String TABLA = "puntuaciones";
@@ -52,6 +52,7 @@ public class GameActivityV3 extends AppCompatActivity {
         imagen.setImageResource(imagenes[10 - intentos]);
 
         this.crearBD();
+        List<Puntuacion> puntuaciones = this.obtenerPuntuaciones();
     }
 
     private String hideWord(String word) {
@@ -114,16 +115,38 @@ public class GameActivityV3 extends AppCompatActivity {
                 + " fecha DATE);");
     }
 
-    public void obtenerPuntuaciones(){
+    public List<Puntuacion> obtenerPuntuaciones(){
         Cursor c = bd.rawQuery("SELECT *"
                         + " FROM " + TABLA
                         + " ORDER BY puntuacion ASC LIMIT 5;",
                 null);
 
-        int ColumnaNombres = c.getColumnIndex("nombres");
-        int ColumnaPuntuacion = c.getColumnIndex("puntuacion");
-        int ColumnaFecha = c.getColumnIndex("fecha");
+        int columnaNombres = c.getColumnIndex("nombres");
+        int columnaPuntuaciones = c.getColumnIndex("puntuacion");
+        int columnaFechas = c.getColumnIndex("fecha");
 
+        List<Puntuacion> puntuaciones = new ArrayList<Puntuacion>();
+
+        if (c != null) {
+            if (c.isBeforeFirst()) {
+                c.moveToFirst();
+                int i = 0;
+
+                do {
+                    i++;
+
+                    String nombre = c.getString(columnaNombres);
+                    int puntuacion = c.getInt(columnaPuntuaciones);
+                    String fecha = c.getString(columnaFechas);
+
+                    Puntuacion p = new Puntuacion(nombre, puntuacion, fecha);
+                    puntuaciones.add(p);
+
+                } while (c.moveToNext());
+            }
+        }
+
+        return puntuaciones;
     }
 
 }

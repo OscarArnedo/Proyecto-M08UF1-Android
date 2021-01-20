@@ -5,9 +5,9 @@ import java.util.Date;
 public class Puntuacion {
     private String nombre;
     private int puntuacion;
-    private Date fecha;
+    private String fecha;
 
-    public Puntuacion(String nombre, int puntuacion, Date fecha){
+    public Puntuacion(String nombre, int puntuacion, String fecha){
         this.nombre = nombre;
         this.puntuacion = puntuacion;
         this.fecha = fecha;
@@ -29,11 +29,11 @@ public class Puntuacion {
         this.puntuacion = puntuacion;
     }
 
-    public Date getFecha(){
+    public String getFecha(){
         return this.fecha;
     }
 
-    public void setFecha(Date fecha){
+    public void setFecha(String fecha){
         this.fecha = fecha;
     }
 }
