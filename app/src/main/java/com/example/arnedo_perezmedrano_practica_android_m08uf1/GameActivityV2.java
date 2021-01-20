@@ -57,7 +57,6 @@ public class GameActivityV2 extends AppCompatActivity {
         if (intentos > 0) {
             if (!ganar) {
                 Button b = (Button) v;
-                //palabra.setText(b.getText());
                 String stLetraPulsada = String.valueOf(b.getText());
                 String p = (String) tvPalabra.getText();
                 b.setEnabled(false);
