@@ -1,11 +1,15 @@
 package com.example.arnedo_perezmedrano_practica_android_m08uf1;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.database.Cursor;
@@ -15,12 +19,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameActivityV3 extends AppCompatActivity {
     //Views
     private TextView tvPalabra;
     private ImageView imagen;
     private static int[] imagenes = {R.drawable.ahorcado0, R.drawable.ahorcado1, R.drawable.ahorcado2, R.drawable.ahorcado3, R.drawable.ahorcado4, R.drawable.ahorcado5, R.drawable.ahorcado6, R.drawable.ahorcado7, R.drawable.ahorcado8, R.drawable.ahorcado9, R.drawable.ahorcado10,};
+    private TextView tvTiempo;
 
     //Lógica de la aplicación
     private String[] palabras;
@@ -28,6 +35,10 @@ public class GameActivityV3 extends AppCompatActivity {
     private String palabraSeleccionada;
     private int intentos = 10;
     private boolean ganar = false;
+    public Timer temp = new Timer();
+    public int contador = 0;
+    private String nombreJugador = "";
+    private Puntuacion puntuacionJugador;
 
     //Base de datos
     SQLiteDatabase bd = null;
@@ -51,8 +62,28 @@ public class GameActivityV3 extends AppCompatActivity {
         imagen = (ImageView) findViewById(R.id.imagen);
         imagen.setImageResource(imagenes[10 - intentos]);
 
-        this.crearBD();
-        List<Puntuacion> puntuaciones = this.obtenerPuntuaciones();
+        tvTiempo = (TextView) findViewById(R.id.tiempo);
+        tvTiempo.setText("Tiempo: "+contador);
+
+        Log.i("TAG", "contador: " + contador);
+        temp.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        tvTiempo.setText("Tiempo: "+contador);
+                        Log.i("TAG:", "contador: " + contador);
+                        contador++;
+                    }
+                });
+            }
+        }, 0, 1000);
+
+        /*this.crearBD();
+        List<Puntuacion> puntuaciones = this.obtenerPuntuaciones();*/
     }
 
     private String hideWord(String word) {
@@ -84,7 +115,13 @@ public class GameActivityV3 extends AppCompatActivity {
                             if (!arrayCompletar.contains("_")) {
                                 ganar = true;
                                 imagen.setImageResource(R.drawable.youwin);
+                                temp.cancel();
+                                Date fecha = new Date();
+                                String now = fecha.getYear() + "-" + ((fecha.getMonth() + 1) < 10 ? "0" + (fecha.getMonth() + 1) : (fecha.getMonth() + 1)) + (fecha.getDate() < 10 ? "0" + fecha.getDate() : fecha.getDate());
+                                openDialog();
+                                puntuacionJugador = new Puntuacion(nombreJugador, contador, now);
                             }
+
                         }
 
                         String textoAMostrar = "";
@@ -98,14 +135,44 @@ public class GameActivityV3 extends AppCompatActivity {
                     }
                 } else {
                     intentos--;
+                    contador += 5;
                     imagen.setImageResource(imagenes[10 - intentos]);
                 }
             }
         } else {
             imagen.setImageResource(R.drawable.gameover);
+            temp.cancel();
         }
 
     }
+
+    public void openDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Nombre del jugador:");
+
+        // Set up the input
+        final EditText input = new EditText(this);
+        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+
+        // Set up the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                nombreJugador = input.getText().toString();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
 
     public void crearBD(){
         bd = this.openOrCreateDatabase(BASE_DATOS, MODE_PRIVATE, null);
