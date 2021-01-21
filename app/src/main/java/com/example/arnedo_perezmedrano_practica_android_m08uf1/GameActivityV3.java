@@ -3,6 +3,7 @@ package com.example.arnedo_perezmedrano_practica_android_m08uf1;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.InputType;
@@ -41,9 +42,10 @@ public class GameActivityV3 extends AppCompatActivity {
     private Puntuacion puntuacionJugador;
 
     //Base de datos
-    SQLiteDatabase bd = null;
+    SQLiteDatabase bd;
     private final String BASE_DATOS = "ahorcado";
     private final String TABLA = "puntuaciones";
+    ContentValues valors;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +53,13 @@ public class GameActivityV3 extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Botón para volver atrás
 
-        palabras = getResources().getStringArray(R.array.words); //Obtenemos las palabras del XML
+        GestorBD utilidadBD = new GestorBD(getBaseContext());
+        bd = utilidadBD.getWritableDatabase();
+        valors = new ContentValues();
 
+        palabras = getResources().getStringArray(R.array.words); //Obtenemos las palabras del XML
         tvPalabra = (TextView) findViewById(R.id.palabra);
+
         Random rand = new Random();
         int random = rand.nextInt(palabras.length);
         palabraSeleccionada = palabras[random];
@@ -174,7 +180,8 @@ public class GameActivityV3 extends AppCompatActivity {
     }
 
 
-    public void crearBD(){
+    /*
+    public void crearBD() {
         bd = this.openOrCreateDatabase(BASE_DATOS, MODE_PRIVATE, null);
         bd.execSQL("CREATE TABLE IF NOT EXISTS "
                 + TABLA
@@ -215,5 +222,19 @@ public class GameActivityV3 extends AppCompatActivity {
 
         return puntuaciones;
     }
+
+    public void insertarPuntuacion(String nombre, int puntuacion) {
+        Date fecha = new Date();
+        String now = fecha.getYear() + "-" + ((fecha.getMonth() + 1) < 10 ? "0" + (fecha.getMonth() + 1) : (fecha.getMonth() + 1)) + (fecha.getDate() < 10 ? "0" + fecha.getDate() : fecha.getDate());
+
+        bd.execSQL("INSERT INTO "
+                + TABLA
+                + " (nombre, puntuacion, fecha)"
+                + " VALUES ('" + nombre + "', " + puntuacion + ", '" + now + "');"
+        );
+
+    }
+
+     */
 
 }

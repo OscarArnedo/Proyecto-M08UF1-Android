@@ -5,10 +5,11 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Ahorcado v1"
+        android:label="Juego del Ahorcado"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Arnedo_PerezMedrano_Practica_Android_M08UF1">
+        <activity android:name=".MainActivityV2"></activity>
         <activity
             android:name=".GameActivityV3"
             android:parentActivityName=".MainActivity" />
