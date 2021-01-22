@@ -1,11 +1,14 @@
 package com.example.arnedo_perezmedrano_practica_android_m08uf1;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.Manifest;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -13,8 +16,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,7 +29,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class GameActivityV3 extends AppCompatActivity {
+public class GameActivityV4 extends AppCompatActivity {
     //Views
     private TextView tvPalabra;
     private ImageView imagen;
@@ -40,6 +46,7 @@ public class GameActivityV3 extends AppCompatActivity {
     public int contador = 0;
     private String nombreJugador = "";
     private Puntuacion puntuacionJugador;
+    public ArrayList<String> contactos = new ArrayList<String>();
 
     //Base de datos
     SQLiteDatabase bd;
@@ -54,11 +61,33 @@ public class GameActivityV3 extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Botón para volver atrás
 
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_CONTACTS)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.READ_CONTACTS)) {
+
+
+            } else {
+
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_CONTACTS},
+                        100);
+            }
+
+        }
+
+
+
         GestorBD utilidadBD = new GestorBD(getBaseContext());
         bd = utilidadBD.getWritableDatabase();
         valors = new ContentValues();
 
-        palabras = getResources().getStringArray(R.array.words); //Obtenemos las palabras del XML
+        //palabras = getResources().getStringArray(R.array.words); //Obtenemos las palabras del XML
+        obtenerContactos();
+        palabras = contactos.toArray(new String[0]);
         tvPalabra = (TextView) findViewById(R.id.palabra);
 
         Random rand = new Random();
@@ -88,6 +117,24 @@ public class GameActivityV3 extends AppCompatActivity {
                 });
             }
         }, 0, 1000);
+
+    }
+
+    public void obtenerContactos() {
+        Cursor managedCursor = getContentResolver()
+                .query(Phone.CONTENT_URI,
+                        new String[] {Phone._ID, Phone.DISPLAY_NAME, Phone.NUMBER}, null, null,  Phone.DISPLAY_NAME + " ASC");
+        try {
+            while (managedCursor.moveToNext()) {
+                int index;
+
+                index = managedCursor.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME);
+                contactos.add(managedCursor.getString(index).toUpperCase().replace(" ","").replace("À", "A").replace("Á","A").replace("È", "E").replace("É", "E").replace("Ó", "O").replace("Í", "I").replace("Ò", "O").replace("Ú", "U"));
+
+            }
+        } finally {
+            managedCursor.close();
+        }
 
     }
 

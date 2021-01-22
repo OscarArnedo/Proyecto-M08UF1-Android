@@ -32,7 +32,7 @@ public class RankingActivity extends AppCompatActivity {
                 null,
                 null,
                 null,
-                "puntuacion DESC",
+                "puntuacion ASC",
                 "5"
         );
 
@@ -53,7 +53,7 @@ public class RankingActivity extends AppCompatActivity {
                     String fecha = c.getString(columnaFechas);
 
                     Puntuacion p = new Puntuacion(nombre, puntuacion, fecha);
-                    resultados.add(p.toString());
+                    resultados.add(i+". "+p.toString());
 
                 } while (c.moveToNext());
             }

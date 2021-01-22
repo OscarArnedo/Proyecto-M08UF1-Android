@@ -26,7 +26,7 @@ public class MainActivityV2 extends Activity {
 
     private void jugar(View view) {
         Intent intent = new Intent(getApplicationContext(),
-                GameActivityV3.class);
+                GameActivityV4.class);
         startActivity(intent);
     }
 
