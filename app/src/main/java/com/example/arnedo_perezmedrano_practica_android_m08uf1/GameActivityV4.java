@@ -182,7 +182,7 @@ public class GameActivityV4 extends AppCompatActivity {
                 int index;
 
                 index = managedCursor.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME);
-                contactos.add(managedCursor.getString(index).toUpperCase().replace(" ","").replace("À", "A").replace("Á","A").replace("È", "E").replace("É", "E").replace("Ó", "O").replace("Í", "I").replace("Ò", "O").replace("Ú", "U"));
+                contactos.add(managedCursor.getString(index).toUpperCase().replace(" ","").replace("À", "A").replace("Á","A").replace("È", "E").replace("É", "E").replace("Í", "I").replace("Ò", "O").replace("Ó", "O").replace("Ú", "U"));
             }
         } finally {
             managedCursor.close();

@@ -49,7 +49,7 @@
         android:id="@+id/salir"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="45dp"
+        android:layout_marginBottom="35dp"
         android:background="@android:color/holo_red_dark"
         android:onClick="salir"
         android:text="Salir"

@@ -68,7 +68,7 @@
         android:id="@+id/Ñ"
         android:layout_width="41dp"
         android:layout_height="40dp"
-        android:layout_marginStart="33dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="13dp"
         android:onClick="letraPulsada"
         android:text="Ñ"
@@ -79,7 +79,7 @@
         android:id="@+id/U"
         android:layout_width="41dp"
         android:layout_height="40dp"
-        android:layout_marginStart="59dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="13dp"
         android:onClick="letraPulsada"
         android:text="U"
@@ -212,25 +212,21 @@
         android:id="@+id/palabra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="10dp"
         android:text="Vamo a juga."
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/E"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagen" />
 
     <Button
         android:id="@+id/A"
         android:layout_width="41dp"
         android:layout_height="40dp"
-        android:layout_marginStart="33dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="480dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="13dp"
         android:onClick="letraPulsada"
         android:text="A"
-        app:layout_constraintBottom_toTopOf="@+id/H"
-        app:layout_constraintEnd_toStartOf="@+id/B"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -304,7 +300,7 @@
         android:id="@+id/H"
         android:layout_width="41dp"
         android:layout_height="40dp"
-        android:layout_marginStart="33dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="13dp"
         android:onClick="letraPulsada"
         android:text="H"
@@ -326,24 +322,24 @@
         android:id="@+id/imagen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="136dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tiempo"
         app:srcCompat="@drawable/ahorcado10" />
 
     <TextView
         android:id="@+id/tiempo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
+        android:layout_marginTop="10dp"
         android:text="Tiempo: 0"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/imagen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/actionbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
