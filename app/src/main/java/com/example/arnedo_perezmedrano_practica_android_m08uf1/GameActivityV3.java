@@ -46,6 +46,7 @@ public class GameActivityV3 extends AppCompatActivity {
     private final String BASE_DATOS = "ahorcado";
     private final String TABLA = "puntuaciones";
     ContentValues valors;
+    Long id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +89,6 @@ public class GameActivityV3 extends AppCompatActivity {
             }
         }, 0, 1000);
 
-        /*this.crearBD();
-        List<Puntuacion> puntuaciones = this.obtenerPuntuaciones();*/
     }
 
     private String hideWord(String word) {
@@ -122,20 +121,29 @@ public class GameActivityV3 extends AppCompatActivity {
                                 ganar = true;
                                 imagen.setImageResource(R.drawable.youwin);
                                 temp.cancel();
+
                                 Date fecha = new Date();
-                                String now = fecha.getYear() + "-" + ((fecha.getMonth() + 1) < 10 ? "0" + (fecha.getMonth() + 1) : (fecha.getMonth() + 1)) + (fecha.getDate() < 10 ? "0" + fecha.getDate() : fecha.getDate());
-                                openDialog();
+                                String now = (fecha.getYear() + 1900) + "-" + ((fecha.getMonth() + 1) < 10 ? "0" + (fecha.getMonth() + 1) : (fecha.getMonth() + 1)) + "-" + (fecha.getDate() < 10 ? "0" + fecha.getDate() : fecha.getDate());
+
+                                openDialog(now);
+
+                                /*Log.i("TAG", "nombre: " + nombreJugador);
                                 puntuacionJugador = new Puntuacion(nombreJugador, contador, now);
+                                valors.put("nombre", puntuacionJugador.getNombre());
+                                valors.put("puntuacion", puntuacionJugador.getPuntuacion());
+                                valors.put("fecha", puntuacionJugador.getFecha());
+
+                                id = bd.insert(TABLA, null, valors);
+
+                                valors.clear();*/
                             }
 
                         }
 
                         String textoAMostrar = "";
-                        String palabraComprobante = "";
 
                         for (int x = 0; x < arrayCompletar.size(); x++) {
                             textoAMostrar += " " + arrayCompletar.get(x);
-                            palabraComprobante += arrayCompletar.get(x);
                         }
                         tvPalabra.setText(textoAMostrar);
                     }
@@ -152,7 +160,7 @@ public class GameActivityV3 extends AppCompatActivity {
 
     }
 
-    public void openDialog(){
+    public void openDialog(String now){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Nombre del jugador:");
 
@@ -167,6 +175,14 @@ public class GameActivityV3 extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 nombreJugador = input.getText().toString();
+                puntuacionJugador = new Puntuacion(nombreJugador, contador, now);
+                valors.put("nombre", puntuacionJugador.getNombre());
+                valors.put("puntuacion", puntuacionJugador.getPuntuacion());
+                valors.put("fecha", puntuacionJugador.getFecha());
+
+                id = bd.insert(TABLA, null, valors);
+
+                valors.clear();
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
