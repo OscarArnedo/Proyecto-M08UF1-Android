@@ -7,44 +7,69 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/jugar"
-        android:layout_width="wrap_content"
+        android:id="@+id/ranking"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="552dp"
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/holo_orange_light"
+        android:onClick="jugar"
+        android:text="Ránking"
+        app:layout_constraintBottom_toTopOf="@+id/salir"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <Button
+        android:id="@+id/jugar"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="10dp"
         android:background="@android:color/holo_green_dark"
         android:onClick="jugar"
         android:text="Jugar"
+        app:layout_constraintBottom_toTopOf="@+id/ranking"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/salir"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
+        android:layout_marginBottom="53dp"
         android:background="@android:color/holo_red_dark"
         android:onClick="salir"
         android:text="Salir"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="356dp"
+        android:layout_height="362dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/inicio"
+        app:layout_constraintBottom_toTopOf="@+id/jugar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jugar" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="63dp"
+        android:layout_marginBottom="38dp"
         android:fontFamily="casual"
         android:text="El Juego del Ahorcado"
         android:textColor="#292626"
         android:textSize="36sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,4 +36,9 @@ public class Puntuacion {
     public void setFecha(String fecha){
         this.fecha = fecha;
     }
+
+    @Override
+    public String toString() {
+        return nombre + " - " + puntuacion + " segundos - " + fecha;
+    }
 }

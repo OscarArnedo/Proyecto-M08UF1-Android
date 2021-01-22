@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Arnedo_PerezMedrano_Practica_Android_M08UF1">
-        <activity android:name=".MainActivityV2"></activity>
+        <activity
+            android:name=".RankingActivity"
+            android:parentActivityName=".MainActivityV2" ></activity>
         <activity
             android:name=".GameActivityV3"
             android:parentActivityName=".MainActivity" />
@@ -20,6 +22,13 @@
             android:name=".GameActivityV1"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivityV2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
