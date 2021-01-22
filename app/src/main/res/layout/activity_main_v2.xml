@@ -6,26 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/comojugar"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="11dp"
+        android:background="@android:color/holo_orange_dark"
+        android:onClick="jugar"
+        android:text="Cómo Jugar"
+        app:layout_constraintBottom_toTopOf="@+id/salir"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/ranking"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="11dp"
         android:background="@android:color/holo_orange_light"
         android:onClick="jugar"
         android:text="Ránking"
-        app:layout_constraintBottom_toTopOf="@+id/salir"
+        app:layout_constraintBottom_toTopOf="@+id/comojugar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
-
 
     <Button
         android:id="@+id/jugar"
         android:layout_width="0dp"
         android:layout_height="46dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="11dp"
         android:background="@android:color/holo_green_dark"
         android:onClick="jugar"
         android:text="Jugar"
@@ -38,7 +49,7 @@
         android:id="@+id/salir"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="53dp"
+        android:layout_marginBottom="45dp"
         android:background="@android:color/holo_red_dark"
         android:onClick="salir"
         android:text="Salir"
@@ -49,13 +60,12 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="356dp"
-        android:layout_height="362dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="336dp"
+        android:layout_height="259dp"
+        android:layout_marginBottom="43dp"
         android:src="@drawable/inicio"
         app:layout_constraintBottom_toTopOf="@+id/jugar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView

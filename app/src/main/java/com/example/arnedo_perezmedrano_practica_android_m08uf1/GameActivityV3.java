@@ -73,7 +73,6 @@ public class GameActivityV3 extends AppCompatActivity {
         tvTiempo = (TextView) findViewById(R.id.tiempo);
         tvTiempo.setText("Tiempo: "+contador);
 
-        Log.i("TAG", "contador: " + contador);
         temp.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -83,7 +82,6 @@ public class GameActivityV3 extends AppCompatActivity {
                     public void run()
                     {
                         tvTiempo.setText("Tiempo: "+contador);
-                        Log.i("TAG:", "contador: " + contador);
                         contador++;
                     }
                 });
@@ -128,15 +126,6 @@ public class GameActivityV3 extends AppCompatActivity {
 
                                 openDialog(now);
 
-                                /*Log.i("TAG", "nombre: " + nombreJugador);
-                                puntuacionJugador = new Puntuacion(nombreJugador, contador, now);
-                                valors.put("nombre", puntuacionJugador.getNombre());
-                                valors.put("puntuacion", puntuacionJugador.getPuntuacion());
-                                valors.put("fecha", puntuacionJugador.getFecha());
-
-                                id = bd.insert(TABLA, null, valors);
-
-                                valors.clear();*/
                             }
 
                         }

@@ -16,6 +16,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.GeolocationPermissions;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -41,6 +45,7 @@ public class GameActivityV4 extends AppCompatActivity {
     private ImageView imagen;
     private static int[] imagenes = {R.drawable.ahorcado0, R.drawable.ahorcado1, R.drawable.ahorcado2, R.drawable.ahorcado3, R.drawable.ahorcado4, R.drawable.ahorcado5, R.drawable.ahorcado6, R.drawable.ahorcado7, R.drawable.ahorcado8, R.drawable.ahorcado9, R.drawable.ahorcado10,};
     private TextView tvTiempo;
+    private WebView navegador;
 
     //Lógica de la aplicación
     private String[] palabras;
@@ -68,7 +73,7 @@ public class GameActivityV4 extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         Toolbar toolbar = findViewById(R.id.actionbar);
         setSupportActionBar(toolbar);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Botón para volver atrás
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Botón para volver atrás
 
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_CONTACTS)
@@ -87,8 +92,6 @@ public class GameActivityV4 extends AppCompatActivity {
             }
 
         }
-
-
 
         GestorBD utilidadBD = new GestorBD(getBaseContext());
         bd = utilidadBD.getWritableDatabase();
@@ -117,7 +120,6 @@ public class GameActivityV4 extends AppCompatActivity {
         tvTiempo = (TextView) findViewById(R.id.tiempo);
         tvTiempo.setText("Tiempo: "+contador);
 
-        Log.i("TAG", "contador: " + contador);
         temp.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -127,7 +129,6 @@ public class GameActivityV4 extends AppCompatActivity {
                     public void run()
                     {
                         tvTiempo.setText("Tiempo: "+contador);
-                        Log.i("TAG:", "contador: " + contador);
                         contador++;
                     }
                 });
@@ -163,7 +164,8 @@ public class GameActivityV4 extends AppCompatActivity {
                 Toast.makeText(this, mensajePista, Toast.LENGTH_LONG).show();
                 return true;
             case R.id.item5:
-                Toast.makeText(this, "Item 5 selected", Toast.LENGTH_SHORT).show();
+                intent = new Intent(getApplicationContext(), HowToPlayActivity.class);
+                startActivity(intent);
                 return true;
 
             default:
@@ -202,7 +204,6 @@ public class GameActivityV4 extends AppCompatActivity {
         if (intentos > 0) {
             if (!ganar) {
                 Button b = (Button) v;
-                //palabra.setText(b.getText());
                 String stLetraPulsada = String.valueOf(b.getText());
                 String p = (String) tvPalabra.getText();
                 b.setEnabled(false);
@@ -211,7 +212,6 @@ public class GameActivityV4 extends AppCompatActivity {
                     for (int i = 0; i < palabraSeleccionada.length(); i++) {
                         char c = palabraSeleccionada.charAt(i);
                         if (stLetraPulsada.charAt(0) == c) {
-                            //cambiarLetra(stLetraPulsada, i);
                             arrayCompletar.set(i, stLetraPulsada);
                             if (!arrayCompletar.contains("_")) {
                                 ganar = true;
@@ -222,16 +222,6 @@ public class GameActivityV4 extends AppCompatActivity {
                                 String now = (fecha.getYear() + 1900) + "-" + ((fecha.getMonth() + 1) < 10 ? "0" + (fecha.getMonth() + 1) : (fecha.getMonth() + 1)) + "-" + (fecha.getDate() < 10 ? "0" + fecha.getDate() : fecha.getDate());
 
                                 openDialog(now);
-
-                                /*Log.i("TAG", "nombre: " + nombreJugador);
-                                puntuacionJugador = new Puntuacion(nombreJugador, contador, now);
-                                valors.put("nombre", puntuacionJugador.getNombre());
-                                valors.put("puntuacion", puntuacionJugador.getPuntuacion());
-                                valors.put("fecha", puntuacionJugador.getFecha());
-
-                                id = bd.insert(TABLA, null, valors);
-
-                                valors.clear();*/
                             }
 
                         }
@@ -294,63 +284,5 @@ public class GameActivityV4 extends AppCompatActivity {
 
         builder.show();
     }
-
-
-    /*
-    public void crearBD() {
-        bd = this.openOrCreateDatabase(BASE_DATOS, MODE_PRIVATE, null);
-        bd.execSQL("CREATE TABLE IF NOT EXISTS "
-                + TABLA
-                + " (nombre VARCHAR, puntuacion INT(3),"
-                + " fecha DATE);");
-    }
-
-    public List<Puntuacion> obtenerPuntuaciones(){
-        Cursor c = bd.rawQuery("SELECT *"
-                        + " FROM " + TABLA
-                        + " ORDER BY puntuacion DSC LIMIT 5;",
-                null);
-
-        int columnaNombres = c.getColumnIndex("nombres");
-        int columnaPuntuaciones = c.getColumnIndex("puntuacion");
-        int columnaFechas = c.getColumnIndex("fecha");
-
-        List<Puntuacion> puntuaciones = new ArrayList<Puntuacion>();
-
-        if (c != null) {
-            if (c.isBeforeFirst()) {
-                c.moveToFirst();
-                int i = 0;
-
-                do {
-                    i++;
-
-                    String nombre = c.getString(columnaNombres);
-                    int puntuacion = c.getInt(columnaPuntuaciones);
-                    String fecha = c.getString(columnaFechas);
-
-                    Puntuacion p = new Puntuacion(nombre, puntuacion, fecha);
-                    puntuaciones.add(p);
-
-                } while (c.moveToNext());
-            }
-        }
-
-        return puntuaciones;
-    }
-
-    public void insertarPuntuacion(String nombre, int puntuacion) {
-        Date fecha = new Date();
-        String now = fecha.getYear() + "-" + ((fecha.getMonth() + 1) < 10 ? "0" + (fecha.getMonth() + 1) : (fecha.getMonth() + 1)) + (fecha.getDate() < 10 ? "0" + fecha.getDate() : fecha.getDate());
-
-        bd.execSQL("INSERT INTO "
-                + TABLA
-                + " (nombre, puntuacion, fecha)"
-                + " VALUES ('" + nombre + "', " + puntuacion + ", '" + now + "');"
-        );
-
-    }
-
-     */
 
 }

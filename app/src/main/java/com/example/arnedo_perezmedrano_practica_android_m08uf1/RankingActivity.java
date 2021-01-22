@@ -9,6 +9,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.webkit.GeolocationPermissions;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -19,6 +23,8 @@ import java.util.List;
 
 public class RankingActivity extends AppCompatActivity {
 
+    private WebView navegador;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +32,7 @@ public class RankingActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.actionbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         GestorBD utilidadBD = new GestorBD(getBaseContext());
         SQLiteDatabase bd = utilidadBD.getReadableDatabase();
@@ -112,7 +119,8 @@ public class RankingActivity extends AppCompatActivity {
                 Toast.makeText(this, "Inicia una partida para obtener una pista.", Toast.LENGTH_LONG).show();
                 return true;
             case R.id.item5:
-                Toast.makeText(this, "Item 5 selected", Toast.LENGTH_SHORT).show();
+                intent = new Intent(getApplicationContext(), HowToPlayActivity.class);
+                startActivity(intent);
                 return true;
 
             default:

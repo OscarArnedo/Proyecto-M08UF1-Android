@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.arnedo_perezmedrano_practica_android_m08uf1">
+
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,28 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Arnedo_PerezMedrano_Practica_Android_M08UF1">
-        <activity
-            android:name=".GameActivityV4"
-            android:parentActivityName=".MainActivityV2" />
-        <activity
-            android:name=".RankingActivity"
-            android:parentActivityName=".MainActivityV2" ></activity>
-        <activity
-            android:name=".GameActivityV3"
-            android:parentActivityName=".MainActivityV2" />
-        <activity
-            android:name=".GameActivityV2"
-            android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".GameActivityV1"
-            android:parentActivityName=".MainActivity" />
-        <!--<activity android:name=".MainActivity">
+        <!--
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>-->
+        </activity>
+        -->
         <activity android:name=".MainActivityV2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,6 +28,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".GameActivityV1"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".GameActivityV2"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".GameActivityV3"
+            android:parentActivityName=".MainActivityV2" />
+        <activity
+            android:name=".GameActivityV4"
+            android:parentActivityName=".MainActivityV2" />
+        <activity
+            android:name=".RankingActivity"
+            android:parentActivityName=".MainActivityV2" />
+        <activity
+            android:name=".HowToPlayActivity"
+            android:parentActivityName=".MainActivityV2"></activity>
 
         <meta-data
             android:name="preloaded_fonts"

@@ -14,6 +14,7 @@ public class MainActivityV2 extends Activity {
 
     private Button jugar;
     private Button puntuacion;
+    private Button comojugar;
     private Button salir;
 
     @Override
@@ -25,6 +26,8 @@ public class MainActivityV2 extends Activity {
         jugar.setOnClickListener(this::jugar);
         puntuacion = (Button) findViewById(R.id.ranking);
         puntuacion.setOnClickListener(this::puntuaciones);
+        comojugar = (Button) findViewById(R.id.comojugar);
+        comojugar.setOnClickListener(this::comojugar);
         salir = (Button) findViewById(R.id.salir);
         salir.setOnClickListener(this::salir);
     }
@@ -40,6 +43,12 @@ public class MainActivityV2 extends Activity {
     private void puntuaciones(View view) {
         Intent intent = new Intent(getApplicationContext(),
                 RankingActivity.class);
+        startActivity(intent);
+    }
+
+    private void comojugar(View view) {
+        Intent intent = new Intent(getApplicationContext(),
+                HowToPlayActivity.class);
         startActivity(intent);
     }
 
