@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -183,6 +184,10 @@ public class GameActivityV3 extends AppCompatActivity {
                 id = bd.insert(TABLA, null, valors);
 
                 valors.clear();
+
+                Intent intent = new Intent(getApplicationContext(),
+                        RankingActivity.class);
+                startActivity(intent);
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -194,63 +199,5 @@ public class GameActivityV3 extends AppCompatActivity {
 
         builder.show();
     }
-
-
-    /*
-    public void crearBD() {
-        bd = this.openOrCreateDatabase(BASE_DATOS, MODE_PRIVATE, null);
-        bd.execSQL("CREATE TABLE IF NOT EXISTS "
-                + TABLA
-                + " (nombre VARCHAR, puntuacion INT(3),"
-                + " fecha DATE);");
-    }
-
-    public List<Puntuacion> obtenerPuntuaciones(){
-        Cursor c = bd.rawQuery("SELECT *"
-                        + " FROM " + TABLA
-                        + " ORDER BY puntuacion DSC LIMIT 5;",
-                null);
-
-        int columnaNombres = c.getColumnIndex("nombres");
-        int columnaPuntuaciones = c.getColumnIndex("puntuacion");
-        int columnaFechas = c.getColumnIndex("fecha");
-
-        List<Puntuacion> puntuaciones = new ArrayList<Puntuacion>();
-
-        if (c != null) {
-            if (c.isBeforeFirst()) {
-                c.moveToFirst();
-                int i = 0;
-
-                do {
-                    i++;
-
-                    String nombre = c.getString(columnaNombres);
-                    int puntuacion = c.getInt(columnaPuntuaciones);
-                    String fecha = c.getString(columnaFechas);
-
-                    Puntuacion p = new Puntuacion(nombre, puntuacion, fecha);
-                    puntuaciones.add(p);
-
-                } while (c.moveToNext());
-            }
-        }
-
-        return puntuaciones;
-    }
-
-    public void insertarPuntuacion(String nombre, int puntuacion) {
-        Date fecha = new Date();
-        String now = fecha.getYear() + "-" + ((fecha.getMonth() + 1) < 10 ? "0" + (fecha.getMonth() + 1) : (fecha.getMonth() + 1)) + (fecha.getDate() < 10 ? "0" + fecha.getDate() : fecha.getDate());
-
-        bd.execSQL("INSERT INTO "
-                + TABLA
-                + " (nombre, puntuacion, fecha)"
-                + " VALUES ('" + nombre + "', " + puntuacion + ", '" + now + "');"
-        );
-
-    }
-
-     */
 
 }

@@ -3,6 +3,7 @@ package com.example.arnedo_perezmedrano_practica_android_m08uf1;
 import android.Manifest;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -228,6 +229,10 @@ public class GameActivityV4 extends AppCompatActivity {
                 id = bd.insert(TABLA, null, valors);
 
                 valors.clear();
+
+                Intent intent = new Intent(getApplicationContext(),
+                        RankingActivity.class);
+                startActivity(intent);
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

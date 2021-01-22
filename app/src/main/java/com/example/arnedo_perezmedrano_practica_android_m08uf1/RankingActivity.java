@@ -24,44 +24,55 @@ public class RankingActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter;
 
         ListView lv = (ListView) findViewById(R.id.list);
+        try{
 
-        Cursor c = bd.query(
-                "puntuaciones",
-                new String[]{"nombre", "puntuacion", "fecha"},
-                null,
-                null,
-                null,
-                null,
-                "puntuacion ASC",
-                "5"
-        );
+            Cursor c = bd.query(
+                    "puntuaciones",
+                    new String[]{"nombre", "puntuacion", "fecha"},
+                    null,
+                    null,
+                    null,
+                    null,
+                    "puntuacion ASC",
+                    "5"
+            );
 
-        int columnaNombres = c.getColumnIndexOrThrow("nombre");
-        int columnaPuntuaciones = c.getColumnIndexOrThrow("puntuacion");
-        int columnaFechas = c.getColumnIndexOrThrow("fecha");
+            int columnaNombres = c.getColumnIndexOrThrow("nombre");
+            int columnaPuntuaciones = c.getColumnIndexOrThrow("puntuacion");
+            int columnaFechas = c.getColumnIndexOrThrow("fecha");
 
-        if (c != null) {
-            if (c.isBeforeFirst()) {
-                c.moveToFirst();
-                int i = 0;
+            if (c != null) {
+                if (c.isBeforeFirst()) {
+                    c.moveToFirst();
+                    int i = 0;
 
-                do {
-                    i++;
+                    do {
+                        i++;
 
-                    String nombre = c.getString(columnaNombres);
-                    int puntuacion = c.getInt(columnaPuntuaciones);
-                    String fecha = c.getString(columnaFechas);
+                        String nombre = c.getString(columnaNombres);
+                        int puntuacion = c.getInt(columnaPuntuaciones);
+                        String fecha = c.getString(columnaFechas);
 
-                    Puntuacion p = new Puntuacion(nombre, puntuacion, fecha);
-                    resultados.add(i+". "+p.toString());
+                        Puntuacion p = new Puntuacion(nombre, puntuacion, fecha);
+                        resultados.add(i+". "+p.toString());
 
-                } while (c.moveToNext());
+                    } while (c.moveToNext());
+                }
             }
+
+            adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, resultados);
+
+            lv.setAdapter(adapter);
+
+        } catch(Exception e) {
+            List<String> l = new ArrayList<>();
+            l.add("Todavía no se ha registrado ninguna puntuación.");
+            adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, l);
+
         }
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, resultados);
-
         lv.setAdapter(adapter);
+
 
     }
 }
