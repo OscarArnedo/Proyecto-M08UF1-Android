@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/item1"
-        android:title="Item1"
+        android:title="HOME"
         app:showAsAction="never">
     </item>
     <item android:id="@+id/item2"
-
-        android:title="Item2"
+        android:title="JUGAR"
         app:showAsAction="never">
-
+    </item>
+    <item android:id="@+id/item3"
+        android:title="RÁNKING"
+        app:showAsAction="never">
+    </item>
+    <item android:id="@+id/item4"
+        android:title="PISTA"
+        app:showAsAction="never">
+    </item>
+    <item android:id="@+id/item5"
+        android:title="CÓMO JUGAR"
+        app:showAsAction="never">
     </item>
 </menu>

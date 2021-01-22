@@ -6,11 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".RankingActivity">
 
+    <include
+        android:id="@+id/actionbar"
+        layout="@layout/actionbar" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="casual"
         android:text="RÁNKING: "
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
@@ -18,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/actionbar" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -35,7 +39,10 @@
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:choiceMode="none"
-            android:drawSelectorOnTop="false" />
+            android:drawSelectorOnTop="false" >
+
+        </ListView>
 
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

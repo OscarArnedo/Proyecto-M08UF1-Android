@@ -12,12 +12,17 @@ import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.text.InputType;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -48,6 +53,7 @@ public class GameActivityV4 extends AppCompatActivity {
     private String nombreJugador = "";
     private Puntuacion puntuacionJugador;
     public ArrayList<String> contactos = new ArrayList<String>();
+    private String mensajePista;
 
     //Base de datos
     SQLiteDatabase bd;
@@ -60,6 +66,8 @@ public class GameActivityV4 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        Toolbar toolbar = findViewById(R.id.actionbar);
+        setSupportActionBar(toolbar);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Botón para volver atrás
 
         if (ContextCompat.checkSelfPermission(this,
@@ -86,9 +94,16 @@ public class GameActivityV4 extends AppCompatActivity {
         bd = utilidadBD.getWritableDatabase();
         valors = new ContentValues();
 
-        //palabras = getResources().getStringArray(R.array.words); //Obtenemos las palabras del XML
         obtenerContactos();
-        palabras = contactos.toArray(new String[0]);
+        if (contactos.size() == 0){
+            palabras = getResources().getStringArray(R.array.words); //Obtenemos las palabras del XML
+            mensajePista = "Es un vegetal.";
+        }
+        else {
+            palabras = contactos.toArray(new String[0]);
+            mensajePista = "Es un contacto de tu móvil";
+        }
+
         tvPalabra = (TextView) findViewById(R.id.palabra);
 
         Random rand = new Random();
@@ -119,6 +134,41 @@ public class GameActivityV4 extends AppCompatActivity {
             }
         }, 0, 1000);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+        switch (item.getItemId()) {
+            case R.id.item1:
+                intent = new Intent(getApplicationContext(), MainActivityV2.class);
+                startActivity(intent);
+                return true;
+            case R.id.item2:
+                intent = new Intent(getApplicationContext(), GameActivityV4.class);
+                startActivity(intent);
+                return true;
+            case R.id.item3:
+                intent = new Intent(getApplicationContext(), RankingActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.item4:
+                Toast.makeText(this, mensajePista, Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.item5:
+                Toast.makeText(this, "Item 5 selected", Toast.LENGTH_SHORT).show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void obtenerContactos() {

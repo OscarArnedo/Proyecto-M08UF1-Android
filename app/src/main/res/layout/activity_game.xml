@@ -5,6 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".GameActivityV1">
 
+    <include
+        android:id="@+id/actionbar"
+        layout="@layout/actionbar" />
+
     <Button
         android:id="@+id/J"
         android:layout_width="41dp"
@@ -208,12 +212,11 @@
         android:id="@+id/palabra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="4dp"
         android:text="Vamo a juga."
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/E"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -221,7 +224,7 @@
         android:layout_width="41dp"
         android:layout_height="40dp"
         android:layout_marginStart="33dp"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="480dp"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="13dp"
         android:onClick="letraPulsada"
@@ -236,7 +239,7 @@
         android:layout_width="41dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="480dp"
         android:onClick="letraPulsada"
         android:text="B"
         app:layout_constraintStart_toEndOf="@+id/A"
@@ -247,7 +250,7 @@
         android:layout_width="41dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="480dp"
         android:onClick="letraPulsada"
         android:text="C"
         app:layout_constraintStart_toEndOf="@+id/B"
@@ -258,7 +261,7 @@
         android:layout_width="41dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="480dp"
         android:onClick="letraPulsada"
         android:text="D"
         app:layout_constraintStart_toEndOf="@+id/C"
@@ -269,7 +272,7 @@
         android:layout_width="41dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="480dp"
         android:onClick="letraPulsada"
         android:text="E"
         app:layout_constraintStart_toEndOf="@+id/D"
@@ -280,7 +283,7 @@
         android:layout_width="41dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="480dp"
         android:onClick="letraPulsada"
         android:text="F"
         app:layout_constraintStart_toEndOf="@+id/E"
@@ -291,7 +294,7 @@
         android:layout_width="41dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="480dp"
         android:onClick="letraPulsada"
         android:text="G"
         app:layout_constraintStart_toEndOf="@+id/F"
@@ -323,9 +326,9 @@
         android:id="@+id/imagen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="136dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ahorcado10" />
@@ -334,15 +337,13 @@
         android:id="@+id/tiempo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="6dp"
+        android:layout_marginBottom="12dp"
         android:text="Tiempo: 0"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/imagen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

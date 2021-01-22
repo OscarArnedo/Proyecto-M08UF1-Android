@@ -2,12 +2,18 @@ package com.example.arnedo_perezmedrano_practica_android_m08uf1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import androidx.appcompat.widget.Toolbar;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +23,9 @@ public class RankingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking);
+
+        Toolbar toolbar = findViewById(R.id.actionbar);
+        setSupportActionBar(toolbar);
 
         GestorBD utilidadBD = new GestorBD(getBaseContext());
         SQLiteDatabase bd = utilidadBD.getReadableDatabase();
@@ -74,5 +83,40 @@ public class RankingActivity extends AppCompatActivity {
         lv.setAdapter(adapter);
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+        switch (item.getItemId()) {
+            case R.id.item1:
+                intent = new Intent(getApplicationContext(), MainActivityV2.class);
+                startActivity(intent);
+                return true;
+            case R.id.item2:
+                intent = new Intent(getApplicationContext(), GameActivityV4.class);
+                startActivity(intent);
+                return true;
+            case R.id.item3:
+                intent = new Intent(getApplicationContext(), RankingActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.item4:
+                Toast.makeText(this, "Inicia una partida para obtener una pista.", Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.item5:
+                Toast.makeText(this, "Item 5 selected", Toast.LENGTH_SHORT).show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
