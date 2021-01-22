@@ -59,7 +59,7 @@ public class GameActivityV4 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Botón para volver atrás
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Botón para volver atrás
 
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_CONTACTS)
@@ -130,12 +130,10 @@ public class GameActivityV4 extends AppCompatActivity {
 
                 index = managedCursor.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME);
                 contactos.add(managedCursor.getString(index).toUpperCase().replace(" ","").replace("À", "A").replace("Á","A").replace("È", "E").replace("É", "E").replace("Ó", "O").replace("Í", "I").replace("Ò", "O").replace("Ú", "U"));
-
             }
         } finally {
             managedCursor.close();
         }
-
     }
 
     private String hideWord(String word) {

@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <include
+        android:id="@+id/actionbar"
+        layout="@layout/actionbar"/>
+
     <Button
         android:id="@+id/ranking"
         android:layout_width="0dp"
