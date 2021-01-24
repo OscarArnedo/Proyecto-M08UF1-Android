@@ -9,10 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.webkit.GeolocationPermissions;
-import android.webkit.WebChromeClient;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -22,8 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RankingActivity extends AppCompatActivity {
-
-    private WebView navegador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
